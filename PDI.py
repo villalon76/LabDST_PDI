@@ -477,103 +477,107 @@ with (tab_multi):
 
     with col_image:
 
-        if operacion == "Mostrar Bandas de la Imagen Multiespectral":
-            XS1, XS2, XS3, SWIR = cv2.split(img_mul)
-            ba_xs1, ba_xs2, ba_xs3, ba_xs4 = st.columns(4)
-            with ba_xs1:
-                st.markdown("**Banda XS1: Verde (Green):**")
-                st.image(XS1, width=250)
-            with ba_xs2:
-                st.markdown("**Banda XS2: Rojo (Red):**")
-                st.image(XS2, width=250)
-            with ba_xs3:
-                st.markdown("**Banda XS3: Infrarrojo Cercano (NIR):**")
-                st.image(XS3, width=250)
-            with ba_xs4:
-                st.markdown("**SWIR: Infrarrojo de Onda Corta (SWIR):**")
-                st.image(SWIR, width=250)
-            img_res1 = img_jpg
-            img_res2 = img_mul
-            etique1 = "Imagen Multiespectral en Color Verdadero (3 Bandas):"
-            etique2 = "Imagen Multiespectral en Color Falso (4 Bandas):"
-            etiqueta1 = f"**{etique1}**"
-            etiqueta2 = f"**{etique2}**"
-
-        if operacion == "Combinar 3 Bandas a Color Verdadero":
-            list_cort = combina.copy()
-            for i, n in enumerate(combina):
-                if n == "Banda XS1: Verde (Green)":
-                    list_cort[i] = "XS1"
-                if n == "Banda XS2: Rojo (Red)":
-                    list_cort[i] = "XS2"
-                if n == "Banda XS3: Infrarrojo Cercano (NIR)":
-                    list_cort[i] = "XS3"
-                if n == "SWIR: Infrarrojo de Onda Corta (SWIR)":
-                    list_cort[i] = "SWIR"
-            if len(combina) == 3:
-                list_comb = []
-                img_comb = np.zeros((img_mul.shape[0], img_mul.shape[1], 3))
+        if img_mul is not None:
+            
+            if operacion == "Mostrar Bandas de la Imagen Multiespectral":
                 XS1, XS2, XS3, SWIR = cv2.split(img_mul)
-                if "Banda XS1: Verde (Green)" in combina:
-                    list_comb.append(XS1)
-                if "Banda XS2: Rojo (Red)" in combina:
-                    list_comb.append(XS2)
-                if "Banda XS3: Infrarrojo Cercano (NIR)" in combina:
-                    list_comb.append(XS3)
-                if "SWIR: Infrarrojo de Onda Corta (SWIR)" in combina:
-                    list_comb.append(SWIR)
-                img_comb[:, :, 0] = list_comb[0]
-                img_comb[:, :, 1] = list_comb[1]
-                img_comb[:, :, 2] = list_comb[2]
-                img_res2 = img_comb.astype(np.uint8)
+                ba_xs1, ba_xs2, ba_xs3, ba_xs4 = st.columns(4)
+                with ba_xs1:
+                    st.markdown("**Banda XS1: Verde (Green):**")
+                    st.image(XS1, width=250)
+                with ba_xs2:
+                    st.markdown("**Banda XS2: Rojo (Red):**")
+                    st.image(XS2, width=250)
+                with ba_xs3:
+                    st.markdown("**Banda XS3: Infrarrojo Cercano (NIR):**")
+                    st.image(XS3, width=250)
+                with ba_xs4:
+                    st.markdown("**SWIR: Infrarrojo de Onda Corta (SWIR):**")
+                    st.image(SWIR, width=250)
+                img_res1 = img_jpg
+                img_res2 = img_mul
+                etique1 = "Imagen Multiespectral en Color Verdadero (3 Bandas):"
+                etique2 = "Imagen Multiespectral en Color Falso (4 Bandas):"
+                etiqueta1 = f"**{etique1}**"
+                etiqueta2 = f"**{etique2}**"
+
+            if operacion == "Combinar 3 Bandas a Color Verdadero":
+                list_cort = combina.copy()
+                for i, n in enumerate(combina):
+                    if n == "Banda XS1: Verde (Green)":
+                        list_cort[i] = "XS1"
+                    if n == "Banda XS2: Rojo (Red)":
+                        list_cort[i] = "XS2"
+                    if n == "Banda XS3: Infrarrojo Cercano (NIR)":
+                        list_cort[i] = "XS3"
+                    if n == "SWIR: Infrarrojo de Onda Corta (SWIR)":
+                        list_cort[i] = "SWIR"
+                if len(combina) == 3:
+                    list_comb = []
+                    img_comb = np.zeros((img_mul.shape[0], img_mul.shape[1], 3))
+                    XS1, XS2, XS3, SWIR = cv2.split(img_mul)
+                    if "Banda XS1: Verde (Green)" in combina:
+                        list_comb.append(XS1)
+                    if "Banda XS2: Rojo (Red)" in combina:
+                        list_comb.append(XS2)
+                    if "Banda XS3: Infrarrojo Cercano (NIR)" in combina:
+                        list_comb.append(XS3)
+                    if "SWIR: Infrarrojo de Onda Corta (SWIR)" in combina:
+                        list_comb.append(SWIR)
+                    img_comb[:, :, 0] = list_comb[0]
+                    img_comb[:, :, 1] = list_comb[1]
+                    img_comb[:, :, 2] = list_comb[2]
+                    img_res2 = img_comb.astype(np.uint8)
+                    img_res1 = img_jpg
+                    etique1 = "Imagen Multiespectral en Color Verdadero (3 Bandas):"
+                    etique2 = "Imagen con Bandas: " + list_cort[0] + ", " + list_cort[1] + ", " + list_cort[2] + ":"
+                    etiqueta1 = f"**{etique1}**"
+                    etiqueta2 = f"**{etique2}**"
+                    etiqueta_save = "Multi_Comb_3Ban"
+                if len(combina) != 3:
+                    img_res2 = img_jpg
+                    etique1 = "Imagen Multiespectral en Color Verdadero (3 Bandas):"
+                    etique2 = "Seleccionando Bandas..."
+                    etiqueta1 = f"**{etique1}**"
+                    etiqueta2 = f"**{etique2}**"
+                    etiqueta_save = "Multi_Comb_3Ban"
+
+            if operacion == "Cálculo del Índice NDVI":
+                XS1, XS2, XS3, SWIR = cv2.split(img_mul)
+                nir = XS3.astype(np.float32)
+                red = XS2.astype(np.float32)
+                denominador = nir + red
+                denominador[denominador == 0] = 0.00001
+                ndvi = (nir - red) / denominador
+                ndvi_visual = cv2.normalize(ndvi, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+                ndvi_coloreado = cv2.applyColorMap(ndvi_visual, cv2.COLORMAP_JET)
+                img_res1 = ndvi_visual
+                img_res2 = ndvi_coloreado
+                etique1 = "Índice de Vegetación de Diferencia Normalizada (NDVI) Visual:"
+                etique2 = "Índice de Vegetación de Diferencia Normalizada (NDVI) Coloreado:"
+                etiqueta1 = f"**{etique1}**"
+                etiqueta2 = f"**{etique2}**"
+                etiqueta_save = "Multi_NDVI_Col"
+                etiqueta_save1 = "Multi_NDVI_Vis"
+
+            if operacion == "Segmentación por Umbral":
+                XS1, XS2, XS3, SWIR = cv2.split(img_mul)
+                nir = XS3.astype(np.float32)
+                red = XS2.astype(np.float32)
+                denominador = nir + red
+                denominador[denominador == 0] = 0.00001
+                ndvi = (nir - red) / denominador
+                _, mascara_vegetacion = cv2.threshold(ndvi, mul_umb, mul_pix, cv2.THRESH_BINARY)
+                img_rees = mascara_vegetacion[:, :] * 255
+                img_res2 = img_rees.astype(np.uint8)
                 img_res1 = img_jpg
                 etique1 = "Imagen Multiespectral en Color Verdadero (3 Bandas):"
-                etique2 = "Imagen con Bandas: " + list_cort[0] + ", " + list_cort[1] + ", " + list_cort[2] + ":"
+                etique2 = "Segmentación por Umbral:"
                 etiqueta1 = f"**{etique1}**"
                 etiqueta2 = f"**{etique2}**"
-                etiqueta_save = "Multi_Comb_3Ban"
-            if len(combina) != 3:
-                img_res2 = img_jpg
-                etique1 = "Imagen Multiespectral en Color Verdadero (3 Bandas):"
-                etique2 = "Seleccionando Bandas..."
-                etiqueta1 = f"**{etique1}**"
-                etiqueta2 = f"**{etique2}**"
-                etiqueta_save = "Multi_Comb_3Ban"
-
-        if operacion == "Cálculo del Índice NDVI":
-            XS1, XS2, XS3, SWIR = cv2.split(img_mul)
-            nir = XS3.astype(np.float32)
-            red = XS2.astype(np.float32)
-            denominador = nir + red
-            denominador[denominador == 0] = 0.00001
-            ndvi = (nir - red) / denominador
-            ndvi_visual = cv2.normalize(ndvi, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
-            ndvi_coloreado = cv2.applyColorMap(ndvi_visual, cv2.COLORMAP_JET)
-            img_res1 = ndvi_visual
-            img_res2 = ndvi_coloreado
-            etique1 = "Índice de Vegetación de Diferencia Normalizada (NDVI) Visual:"
-            etique2 = "Índice de Vegetación de Diferencia Normalizada (NDVI) Coloreado:"
-            etiqueta1 = f"**{etique1}**"
-            etiqueta2 = f"**{etique2}**"
-            etiqueta_save = "Multi_NDVI_Col"
-            etiqueta_save1 = "Multi_NDVI_Vis"
-
-        if operacion == "Segmentación por Umbral":
-            XS1, XS2, XS3, SWIR = cv2.split(img_mul)
-            nir = XS3.astype(np.float32)
-            red = XS2.astype(np.float32)
-            denominador = nir + red
-            denominador[denominador == 0] = 0.00001
-            ndvi = (nir - red) / denominador
-            _, mascara_vegetacion = cv2.threshold(ndvi, mul_umb, mul_pix, cv2.THRESH_BINARY)
-            img_rees = mascara_vegetacion[:, :] * 255
-            img_res2 = img_rees.astype(np.uint8)
-            img_res1 = img_jpg
-            etique1 = "Imagen Multiespectral en Color Verdadero (3 Bandas):"
-            etique2 = "Segmentación por Umbral:"
-            etiqueta1 = f"**{etique1}**"
-            etiqueta2 = f"**{etique2}**"
-            etiqueta_save = "Multi_Umbral"
+                etiqueta_save = "Multi_Umbral"
+        else:
+            st.warning("Por favor, selecciona una imagen multiespectral válida antes de continuar.")
 
         c1, c2 = st.columns(2)
         with c1:
