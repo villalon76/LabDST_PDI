@@ -433,7 +433,7 @@ with (tab_multi):
 
         if escena == "Zona Metropolitana de Guadalajara - Escena 1":
             #img_mul = cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED)
-            img_mul = np.asarray(cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED), dtype=np.uint8)
+            img_mul = cv2.imread("./GDL01.tiff", cv2.IMREAD_UNCHANGED)
             img_jpg = cv2.cvtColor(cv2.imread("./SPOT5/GDL01.jpg"), cv2.COLOR_BGR2RGB)
         elif escena == "Zona Metropolitana de Guadalajara - Escena 2":
             img_mul = cv2.imread("./SPOT5/GDL02.tiff", cv2.IMREAD_UNCHANGED)
