@@ -476,7 +476,8 @@ with (tab_multi):
                 mul_pix = st.number_input("Vecindario del Pixel (0 a 1):", min_value=0.0, max_value=1.0, value=1.0)
 
     with col_image:
-        img_mul = cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED)
+        #img_mul = cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED)
+        st.write("Tamaño de la Imagen:", img_mul.shape)
         if operacion == "Mostrar Bandas de la Imagen Multiespectral":
             XS1, XS2, XS3, SWIR = cv2.split(img_mul)
             ba_xs1, ba_xs2, ba_xs3, ba_xs4 = st.columns(4)
