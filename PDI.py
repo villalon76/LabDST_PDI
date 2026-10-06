@@ -419,6 +419,7 @@ with (tab_imrgb):
 # TABULACIÓN NÚMERO 2 — IMÁGENES MULTIESPECTRALES
 # ===================================================================
 with (tab_multi):
+    img_mul = cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED)
     etiqueta1 = etiqueta2 = ""
     col_ctrl, col_image = st.columns([1, 2.3], gap="large")
 
