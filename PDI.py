@@ -436,13 +436,16 @@ with (tab_multi):
             img_mul = cv2.imread("./GDL01.tiff", cv2.IMREAD_UNCHANGED)
             img_jpg = cv2.cvtColor(cv2.imread("./SPOT5/GDL01.jpg"), cv2.COLOR_BGR2RGB)
         elif escena == "Zona Metropolitana de Guadalajara - Escena 2":
-            img_mul = cv2.imread("./SPOT5/GDL02.tiff", cv2.IMREAD_UNCHANGED)
+            #img_mul = cv2.imread("./SPOT5/GDL02.tiff", cv2.IMREAD_UNCHANGED)
+            img_mul = cv2.imread("./GDL02.tiff", cv2.IMREAD_UNCHANGED)
             img_jpg = cv2.cvtColor(cv2.imread("./SPOT5/GDL02.jpg"), cv2.COLOR_BGR2RGB)
         elif escena == "Zona Metropolitana de Guadalajara - Escena 3":
-            img_mul = cv2.imread("./SPOT5/GDL03.tiff", cv2.IMREAD_UNCHANGED)
+            #img_mul = cv2.imread("./SPOT5/GDL03.tiff", cv2.IMREAD_UNCHANGED)
+            img_mul = cv2.imread("./GDL03.tiff", cv2.IMREAD_UNCHANGED)
             img_jpg = cv2.cvtColor(cv2.imread("./SPOT5/GDL03.jpg"), cv2.COLOR_BGR2RGB)
         elif escena == "Zona Metropolitana de Guadalajara - Escena 4":
-            img_mul = cv2.imread("./SPOT5/GDL04.tiff", cv2.IMREAD_UNCHANGED)
+            #img_mul = cv2.imread("./SPOT5/GDL04.tiff", cv2.IMREAD_UNCHANGED)
+            img_mul = cv2.imread("./GDL04.tiff", cv2.IMREAD_UNCHANGED)
             img_jpg = cv2.cvtColor(cv2.imread("./SPOT5/GDL04.jpg"), cv2.COLOR_BGR2RGB)
         img_res1 = img_jpg
         img_res2 = img_mul
@@ -477,8 +480,7 @@ with (tab_multi):
                 mul_pix = st.number_input("Vecindario del Pixel (0 a 1):", min_value=0.0, max_value=1.0, value=1.0)
 
     with col_image:
-        if img_mul is None:
-            st.warning("La imagen cargada no tiene 4 canales de banda (XS1, XS2, XS3, SWIR).")
+        
         if operacion == "Mostrar Bandas de la Imagen Multiespectral":
             XS1, XS2, XS3, SWIR = cv2.split(img_mul)
             ba_xs1, ba_xs2, ba_xs3, ba_xs4 = st.columns(4)
