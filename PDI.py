@@ -432,7 +432,8 @@ with (tab_multi):
                      "Zona Metropolitana de Guadalajara - Escena 4"], index=0, key="R1")
 
         if escena == "Zona Metropolitana de Guadalajara - Escena 1":
-            img_mul = cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED)
+            #img_mul = cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED)
+            img_mul = np.asarray(cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED), dtype=np.uint8)
             img_jpg = cv2.cvtColor(cv2.imread("./SPOT5/GDL01.jpg"), cv2.COLOR_BGR2RGB)
         elif escena == "Zona Metropolitana de Guadalajara - Escena 2":
             img_mul = cv2.imread("./SPOT5/GDL02.tiff", cv2.IMREAD_UNCHANGED)
@@ -478,7 +479,6 @@ with (tab_multi):
     with col_image:
         if img_mul is None:
             st.warning("La imagen cargada no tiene 4 canales de banda (XS1, XS2, XS3, SWIR).")
-            st.wite(img_mul.shape)
         if operacion == "Mostrar Bandas de la Imagen Multiespectral":
             XS1, XS2, XS3, SWIR = cv2.split(img_mul)
             ba_xs1, ba_xs2, ba_xs3, ba_xs4 = st.columns(4)
