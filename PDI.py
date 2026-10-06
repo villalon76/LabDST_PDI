@@ -477,7 +477,7 @@ with (tab_multi):
 
     with col_image:
         #img_mul = cv2.imread("./SPOT5/GDL01.tiff", cv2.IMREAD_UNCHANGED)
-        st.write("Tamaño de la Imagen:", img_mul.shape)
+        #st.write("Tamaño de la Imagen:", img_mul.shape)
         if operacion == "Mostrar Bandas de la Imagen Multiespectral":
             XS1, XS2, XS3, SWIR = cv2.split(img_mul)
             ba_xs1, ba_xs2, ba_xs3, ba_xs4 = st.columns(4)
